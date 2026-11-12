@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">درع سولي العائلي</string>
+    <string name="device_admin_description">يسمح لمنظومة سولي للرعاية الرقمية الأبوية بتنظيم وقت الشاشة وحماية الهاتف في حالات الطوارئ.</string>
+    <string name="channel_guardian_title">خدمة الحماية والرعاية الرقمية</string>
+    <string name="channel_alerts_title">تنبيهات السلامة والطوارئ العائلية</string>
+</resources>

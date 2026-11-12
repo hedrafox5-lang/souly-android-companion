@@ -1,0 +1,65 @@
+name: Build Souly Child Companion Multi-Edition APKs
+
+"on":
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    name: Compile & Sign All Android Edition APKs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Accept Android SDK Licenses
+        run: |
+          yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses || true
+
+      - name: Generate Persistent Release Keystore If Needed
+        run: |
+          if [ ! -f app/souly-release-key.jks ]; then
+            keytool -genkeypair -v \
+              -keystore app/souly-release-key.jks \
+              -alias souly_shield_key \
+              -keyalg RSA \
+              -keysize 2048 \
+              -validity 10000 \
+              -storepass SoulyShield2026 \
+              -keypass SoulyShield2026 \
+              -dname "CN=Souly Digital Citadel, OU=Parental Hub, O=Souly, L=Cairo, S=Cairo, C=EG"
+          fi
+
+      - name: Setup Gradle 8.7
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Generate Wrapper & Build All Edition APKs
+        run: |
+          gradle wrapper --gradle-version 8.7
+          chmod +x ./gradlew
+          ./gradlew assembleRelease --stacktrace
+          mkdir -p dist-apk
+          cp app/build/outputs/apk/universalApi26To35/release/app-universalApi26To35-release.apk dist-apk/Souly-Child-Companion-v4.2-Universal-Android8-to-15.apk
+          cp app/build/outputs/apk/legacyApi26To29/release/app-legacyApi26To29-release.apk dist-apk/Souly-Child-Companion-v4.2-Android8-to-10.apk
+          cp app/build/outputs/apk/modernApi30To33/release/app-modernApi30To33-release.apk dist-apk/Souly-Child-Companion-v4.2-Android11-to-13.apk
+          cp app/build/outputs/apk/nextGenApi34To35/release/app-nextGenApi34To35-release.apk dist-apk/Souly-Child-Companion-v4.2-Android14-to-15.apk
+
+      - name: Upload Compiled Multi-Edition APK Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Souly-Child-Companion-v4.2-APK-All-Editions
+          path: dist-apk/*.apk
+          if-no-files-found: error
+          retention-days: 30

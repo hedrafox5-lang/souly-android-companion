@@ -1,0 +1,7 @@
+-keepattributes Signature, InnerClasses, EnclosingMethod
+-keepattributes RuntimeVisibleAnnotations, RuntimeVisibleParameterAnnotations
+-keepclassmembers class com.souly.parental.shield.data.remote.dto.** { *; }
+-keep class com.souly.parental.shield.data.remote.dto.** { *; }
+-keep class com.souly.parental.shield.admin.SoulyDeviceAdminReceiver { *; }
+-dontwarn okhttp3.**
+-dontwarn okio.**

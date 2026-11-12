@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/obsidian_bg"
+    android:gravity="center"
+    android:layoutDirection="rtl"
+    android:orientation="vertical"
+    android:padding="28dp">
+
+    <ImageView
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/ic_shield_logo" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="⏸️ وضع التوقف العائلي المؤقت"
+        android:textColor="@color/amber_warning"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvPauseCustomMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/bg_card_emerald"
+        android:gravity="center"
+        android:padding="18dp"
+        android:text="تم إيقاف الهاتف مؤقتاً من قِبل والدك لوقت الراحة أو المذاكرة."
+        android:textColor="@color/text_white"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnStopSirenAcknowledge"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/amber_warning"
+        android:text="🔕 إيقاف نغمة التنبيه الصوتية"
+        android:textColor="@color/obsidian_bg"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/btnCheckUnlockStatus"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="12dp"
+        android:backgroundTint="@color/emerald_primary"
+        android:text="🔄 التحقق من فك القفل من لوحة الأب"
+        android:textColor="@color/obsidian_bg"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
